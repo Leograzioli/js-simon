@@ -4,13 +4,21 @@ const userNumbersArray = [];
 const guessedNumber = []
 
 
-for (let i = 0; i < 5; i++) {
+
+
+while (RndNumbersArray.length < 5) {
     const element = getRndInteger(1,100);
-    numbersContainer.innerHTML +=` ${element}` ;
-    RndNumbersArray.push(element);
+    if (!RndNumbersArray.includes(element)){
+        numbersContainer.innerHTML +=` ${element}` ;
+        RndNumbersArray.push(element);
+    }
+    
 }
 
-setTimeout(hideElementHtml, 3000);
+setTimeout( () => {
+    numbersContainer.classList.add("hidden");
+}, 3000);
+
 setTimeout(askUser, 3100);
 
 
@@ -20,11 +28,6 @@ setTimeout(askUser, 3100);
 //return (number)
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
-}
-
-//to ad class hidden
-function hideElementHtml () {
-    numbersContainer.classList.add("hidden");
 }
 
 
