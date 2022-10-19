@@ -3,8 +3,15 @@ const RndNumbersArray = [];
 const userNumbersArray = [];
 const guessedNumber = []
 
+//generate rnd numbers in a range between min(number) and max(number) parameters
+const getRndInteger = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+//generate random number and add to RndNumbersArray without repeated number.
 while (RndNumbersArray.length < 5) {
     const element = getRndInteger(1,100);
+
     if (!RndNumbersArray.includes(element)){
         numbersContainer.innerHTML +=` ${element}` ;
         RndNumbersArray.push(element);
@@ -19,7 +26,10 @@ setTimeout( () => {
 // to ask user the numbers 
 const askUser = () => {
     for (let i = 0; i < 5; i++) {
-        let userImput = parseInt(prompt("indovina il numero"));        
+        let userImput = parseInt(prompt("indovina il numero"));
+        if (isNaN(userImput)) {
+            userImput = parseInt(prompt("hai inserito una lettera, indovina il NUMERO"));
+        }      
         userNumbersArray.push(userImput)
     }
     result();
@@ -29,13 +39,7 @@ setTimeout(askUser, 3100);
 
 //FUNCTIONS
 
-//generate rnd numbers in a range between min(number) and max(number) parameters
-//return (number)
-function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
-}
-
-//check if the RndNumbersArray includes the inputed number 
+//ccompares RndNumbersArray with guessedNumber to know the result
 function result() {
     for (let i = 0; i < RndNumbersArray.length; i++) {
         const elementI = RndNumbersArray[i];
