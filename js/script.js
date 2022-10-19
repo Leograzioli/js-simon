@@ -20,7 +20,7 @@ const result = () => {
             };
         }
     }
-    finalResult.innerHTML += (`quantita di numeri indovinati: ${guessedNumber.length}.  i numeri indovinati sono: ${guessedNumber} `);
+    finalResult.innerHTML += `quantita di numeri indovinati: ${guessedNumber.length}.  i numeri indovinati sono: ${guessedNumber} `;
 };
 
 //generate random number and add to RndNumbersArray without repeated number.
