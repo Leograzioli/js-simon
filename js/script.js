@@ -1,5 +1,6 @@
 const qtyNumber = 5;
 const numbersContainer = document.getElementById("numbers");
+const result = document.getElementById("result")
 const rdnNumbers = createRdnNumberArray(qtyNumber);
 numbersContainer.innerHTML = rdnNumbers
 
@@ -14,12 +15,13 @@ setTimeout(() => {
     const userNumbers = askNumber(qtyNumber);
     console.log(userNumbers );
     const arrayCompare1 = (arrayCompare(rdnNumbers, userNumbers)); 
-    console.log(arrayCompare1.length);
+    result.innerHTML = `numeri indovinati: ${arrayCompare1} hai fatto ${arrayCompare1.length} punti`;
 }, 3200)
 
 
 //FUNCTIONS
 //generate rnd numbers in a range between min(number) and max(number) parameters
+// return (number)
 function getRndInteger (min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 };
@@ -53,6 +55,11 @@ function askNumber (arrayLenght) {
 }
 
 
+
+//compare two arrays to see how many itens are equals
+// array1 -> (array)
+// array2 -> (array)
+//return - (array)
 function arrayCompare(array1, array2) {
     const result = [];
     for (let i = 0; i < array1.length; i++) {
