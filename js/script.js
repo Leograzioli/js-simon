@@ -1,56 +1,65 @@
+const qtyNumber = 5;
 const numbersContainer = document.getElementById("numbers");
-const finalResult = document.getElementById("result");
-const RndNumbersArray = [];
-const userNumbersArray = [];
-const guessedNumber = [];
+const rdnNumbers = createRdnNumberArray(qtyNumber);
+numbersContainer.innerHTML = rdnNumbers
 
+console.log(rdnNumbers);
+
+
+setTimeout(() => {
+    numbersContainer.innerHTML = ""
+}, 3000);
+
+setTimeout(() => {
+    const userNumbers = askNumber(qtyNumber);
+    console.log(userNumbers );
+    const arrayCompare1 = (arrayCompare(rdnNumbers, userNumbers)); 
+    console.log(arrayCompare1.length);
+}, 3200)
+
+
+//FUNCTIONS
 //generate rnd numbers in a range between min(number) and max(number) parameters
-const getRndInteger = (min, max) => {
+function getRndInteger (min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 };
 
-//compares RndNumbersArray with guessedNumber to know the result
-const compareArrayAndPrintResult = () => {
-    for (let i = 0; i < RndNumbersArray.length; i++) {
-        const elementI = RndNumbersArray[i];
-        for (let j = 0; j < userNumbersArray.length; j++) {
-            const elementJ = userNumbersArray[j];
-            if(elementJ === elementI){
-                guessedNumber.push(elementJ)
-            };
-        }
+
+//add random number to rndNumbersArray without repeated number.
+// arraylength -> (number) - array length 
+//return --(array) 
+function createRdnNumberArray (arraylength) {
+    const rndNumbersArray = []
+    while (rndNumbersArray.length < arraylength) {
+        const element = getRndInteger(1,100);
+    
+        if (!rndNumbersArray.includes(element)){
+            rndNumbersArray.push(element);
+        } 
     }
-    finalResult.innerHTML += `quantita di numeri indovinati: ${guessedNumber.length}.  i numeri indovinati sono: ${guessedNumber} `;
-};
-
-//generate random number and add to RndNumbersArray without repeated number.
-while (RndNumbersArray.length < 5) {
-    const element = getRndInteger(1,100);
-
-    if (!RndNumbersArray.includes(element)){
-        numbersContainer.innerHTML +=` ${element}`;
-        RndNumbersArray.push(element);
-    } 
+    return rndNumbersArray
 }
 
-//timeout to hide the numbers in DOM
-setTimeout( () => {
-    numbersContainer.classList.add("hidden");
-}, 3000);
-
-// to ask user the numbers 
-setTimeout( () => {
-    for (let i = 0; i < 5; i++) {
-        let userImput = parseInt(prompt("indovina il numero"));
-        if (isNaN(userImput)) {
-            userImput = parseInt(prompt("hai inserito una lettera, indovina il NUMERO"));
-        }      
-        userNumbersArray.push(userImput)
+//ask user the numbers and sabe to an array
+// arraylength -> (number) - array length 
+//return --(array)
+function askNumber (arrayLenght) {
+    const userNumbersArray = [];
+    for (let i = 0; i < arrayLenght; i++) {
+        const userImput = parseInt(prompt("Tell us the memorized numbers"));   
+        userNumbersArray.push(userImput);
     }
-    compareArrayAndPrintResult();
-}, 3100);
+    return userNumbersArray;
+}
 
-//to show the numbers in DOM
-setTimeout( () => {
-    numbersContainer.classList.remove("hidden");
-}, 3200);
+
+function arrayCompare(array1, array2) {
+    const result = [];
+    for (let i = 0; i < array1.length; i++) {
+        const element = array1[i];
+        if (array2.includes(element)) {
+            result.push(element);
+        }
+    }
+    return result;    
+}
