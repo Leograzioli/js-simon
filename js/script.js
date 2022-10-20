@@ -10,7 +10,7 @@ const getRndInteger = (min, max) => {
 };
 
 //compares RndNumbersArray with guessedNumber to know the result
-const result = () => {
+const compareArrayAndPrintResult = () => {
     for (let i = 0; i < RndNumbersArray.length; i++) {
         const elementI = RndNumbersArray[i];
         for (let j = 0; j < userNumbersArray.length; j++) {
@@ -47,7 +47,7 @@ setTimeout( () => {
         }      
         userNumbersArray.push(userImput)
     }
-    result();
+    compareArrayAndPrintResult();
 }, 3100);
 
 //to show the numbers in DOM
